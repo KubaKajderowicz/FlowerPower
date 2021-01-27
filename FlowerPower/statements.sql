@@ -1,0 +1,8 @@
+CREATE TABLE artikel ( ArtikelCode int NOT NULL PRIMARY KEY, Artikel varchar(255), Prijs varchar(255) )
+CREATE TABLE klant( Klantcode INT NOT NULL PRIMARY KEY, Voorletters VARCHAR(255), Tussenvoegsels VARCHAR(255), Achternaam VARCHAR(255), Adres VARCHAR(255), Postcode VARCHAR(255), Woonplaats VARCHAR(255), Geboortedatum VARCHAR(255), Gebruikersnaam VARCHAR(255), Wachtwoord VARCHAR(255) )
+CREATE TABLE Medewerker( Medewerkerscode INT NOT NULL PRIMARY KEY, Voorletters VARCHAR(255), Voorvoegsels VARCHAR(255), Achternaam VARCHAR(255), Gebruikersnaam VARCHAR(255), Wachtwoord VARCHAR(255) )
+CREATE TABLE Winkel( Winkelcode INT NOT NULL PRIMARY KEY, Winkelnaam VARCHAR(255), Winkelpostcode VARCHAR(255), Vestigingsplaats VARCHAR(255), Telefoonnummer VARCHAR(255) )
+CREATE TABLE Factuur( Factuurnummer INT NOT NULL PRIMARY KEY, Factuurdatum VARCHAR(255), Klantcode int, FOREIGN KEY 
+(Klantcode) REFERENCES klant(Klantcode) )
+CREATE TABLE Factuurregel( Factuurnummer INT, Artikelcode INT, Aantal INT, Prijs DECIMAL(10,2), FOREIGN KEY(Factuurnummer) REFERENCES Factuur(Factuurnummer), FOREIGN KEY(Artikelcode) REFERENCES Artikel(Artikelcode) )
+CREATE TABLE Bestelling( Artikelcode INT, Winkelcode INT, Aantal INT, Klantcode INT, Medewerkerscode INT, Afgehaald INT, FOREIGN KEY(Artikelcode) REFERENCES Artikel(Artikelcode), FOREIGN KEY(Winkelcode) REFERENCES Winkel(Winkelcode), FOREIGN KEY(Klantcode) REFERENCES klant(Klantcode), FOREIGN KEY(Medewerkerscode) REFERENCES medewerker(Medewerkerscode) )
